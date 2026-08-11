@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>{% block title %}Crimp & Compare{% endblock %}</title>
+
+{% block nav %}
+<nav>
+    <div class="nav-bar-container">
+        <div class="main-title-home">
+            <a href="{% url 'home' %}"><h1>Crimp & Compare</h1></a>
+        </div>
+        <div class="navigation-options">
+            <a href="{% url 'deals' %}">Deals</a>
+            <a href="{% url 'quiz' %}">Quiz</a>
+            <a href="{% url 'categories' %}">Categories</a>
+            <a href="{% url 'blog' %}">Blog</a>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="home-title">
+            <h2>Compare Specs, Read Guides, and Grab the Best UK Deals on Climbing Shoes.</h2>
+        </div>
+        <div class="search-bar-container">
+            <form action="{% url 'search_results' %}" method="get">
+                <input name="q" type="text" placeholder="Search Shoes..." value="{{ request.GET.q }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="shoe-list-home-container">
+            <h3>Here's a list of some of our most popular shoes</h3>
+        </div>
+        <div class="shoe-thumbnail-container">
+            {% for shoe in shoe_list %}
+                <div class="shoe-thumbnail">
+                    <a href="{% url 'shoe_detail' shoe.slug %}">
+                        <img src="{% static shoe.image_url %}" alt="{{ shoe.name }}" style="width:300px; height:300px; object-fit:cover;">
+                        <h3>{{ shoe.brand }} - {{ shoe.name }}</h3>
+                        <p>Prices starting at: £{{ shoe.min_price }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination-container">
+            <span>
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+    
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+
+{% block script %}
+{% endblock %}

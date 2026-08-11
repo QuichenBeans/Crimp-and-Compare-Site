@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="category-detail-container">
+        <h1>{{ category.name }}</h1>
+        {% if category.description %}
+            <div class="description-wrapper">
+                {{ category.description|linebreaks }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="shoe-thumbnail-container">
+        {% for category in category_detail %}
+        <div class="shoe-thumbnail">
+            <a href="{% url 'shoe_detail' category.slug %}">
+            {% if category.image_url %}
+                <img src="{% static category.image_url %}" alt="{{ category.name }}" style="width:300px; height:300px; object-fit:cover;">
+            {% endif %}
+            <h3>{{ category.brand }} - {{ category.name }}</h3>
+            </a>
+            <p>Prices starting at: £{{ category.min_price }}</p>
+        </div>
+        {% empty %}
+            <p>No shoes found in this category yet.</p>
+        {% endfor %}
+    </div>
+    <div class="pagination-container">
+        <span>
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

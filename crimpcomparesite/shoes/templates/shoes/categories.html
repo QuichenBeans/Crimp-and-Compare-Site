@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>{% block title %}Categories{% endblock %}</title>
+
+{% block nav %}
+    {{ block.super }}
+{% endblock %}
+
+{% block header %}
+    <head>
+    
+    </head>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="categories-title">
+            <h2>Find Your Perfect Fit - Explore Climbing Shoe Types by Category</h2>
+        </div>
+        <div class="category-list">
+            {% for category in shoe_categories %}
+            <a href="{% url 'category_detail' category.slug %}" class="category-card">
+                {% if category.image %}
+                <div class="category-image-wrapper">
+                    <img src="{% static category.image %}" alt="{{ category.name }}" class="category-image">
+                    <div class="category-overlay">
+                        <span class="category-name">{{ category.name }}</span>
+                    </div>
+                </div>
+                {% else %}
+                <div class="category-placeholder">
+                    {{ category.name }}
+                </div>
+                {% endif %}
+            </a>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+
+{% block script %}
+{% endblock %}

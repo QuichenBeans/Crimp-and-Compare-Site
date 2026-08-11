@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>{% block title %}Deals{% endblock %}</title>
+
+{% block nav %}
+    {{ block.super }}
+{% endblock %}
+
+{% block header %}
+    <head>
+        <div class="main-title-home">
+            
+        </div>
+    </head>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="main-title-deals">
+            <h1>Shoe Deals & Discounts</h1>
+        </div>
+        <div class="filter-deals-container">
+            <div class="filter-deals-title">
+                <h3>Filters</h3>
+            </div>
+            <form method="get">
+                {{ filter.form.as_p }}
+                <input type="submit" value="Filter"/>
+            </form>
+        </div>
+        <div class="shoe-thumbnail-container">
+            {% for shoe in shoes_with_deals %}
+                <div class="shoe-thumbnail">
+                    <a href="{% url 'shoe_detail' shoe.slug %}">
+                        <img src="{% static shoe.image_url %}" alt="{{ shoe.name }}" style="width:300px; height:300px; object-fit:cover;">
+                        <h3>{{ shoe.brand }} - {{ shoe.name }}</h3>
+                    </a>
+                    
+                    {% for offer in shoe.active_deals %}
+                        <p class="price-info">
+                            <span class="retailer-name">{{ offer.retailer }}:</span> 
+                            <span class="original-price" style="text-decoration: line-through;">
+                                £{{ offer.price }}
+                            </span>
+                            <span class="sale-price" style="color: red; font-weight: bold;">
+                                Now £{{ offer.discounted_price }}
+                            </span>
+                            {% if offer.discount_amount %}
+                                <span class="savings">
+                                    Save £{{ offer.discount_amount }}
+                                </span>
+                            {% endif %}
+                        </p>
+                    {% empty %}
+                        <p>No active deals for this shoe</p>
+                    {% endfor %}
+                </div>
+            {% empty %}
+                <p>No shoe deals available right now. Check back soon!</p>
+            {% endfor %}
+        </div>
+        <div class="pagination-container">
+            <span>
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+    
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+
+{% block script %}
+{% endblock %}

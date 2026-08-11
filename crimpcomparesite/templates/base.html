@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}Crimp & Compare{% endblock %}</title>
+</head>
+<body>
+    {% block nav %}
+    <nav>
+        <div class="nav-bar-base">
+            <div class="main-title-home-base">
+                <a href="{% url 'home' %}"><h1>Crimp & Compare</h1></a>
+            </div>
+            <div class="navigation-options-base">
+                <a href="{% url 'deals' %}">Deals</a>
+                <a href="{% url 'quiz' %}">Quiz</a>
+                <a href="{% url 'categories' %}">Categories</a>
+                <a href="{% url 'blog' %}">Blog</a>
+            </div>
+            <div class="search-bar-container-base">
+                <form action="{% url 'search_results' %}" method="get">
+                    <input name="q" type="text" placeholder="Search Shoes..." value="{{ request.GET.q }}">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
+
+    {% block header %}
+    {% endblock %}
+
+    {% block content %}
+    <main>
+
+    </main>
+    {% endblock %}
+
+    {% block footer %}
+    <footer>
+        <div class="footer-container">
+            <div class="footer-contact-disclaimer">
+                <h3>Contact and Disclaimer</h3>
+                <div class="footer-links">
+                    <p><a href="{% url 'contact' %}">Contact</a></p>
+                    <p><a href="{% url 'disclaimer' %}">Disclaimer</a></p>
+                </div>
+                
+            </div>
+            <div class="footer-quick-links">
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <p><a href="{% url 'home' %}">Home</a></p>
+                    <p><a href="{% url 'deals' %}">Deals</a></p>
+                    <p><a href="{% url 'categories' %}">Categories</a></p>
+                    <p><a href="{% url 'blog' %}">Blog</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+
+    {% block script %}
+    {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>{% block title %}Compare Shoes{% endblock %}</title>
+
+{% block nav %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="quiz-card">
+    <header>
+        <div class="main-title-quiz">
+            <h2>Struggling to find your next pair of climbing shoes? Take our shoe quiz!</h2>
+        </div>
+    </header>
+    <main>
+        <div class="subhead">
+            Answer 5 quick questions below to get tailor made shoe recommendations
+        </div>
+
+        <form method="get" class="quiz-form">
+            {{ form.as_p }}
+            <div class="submit-wrap">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </main>
+</div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+
+{% block script %}
+{% endblock %}

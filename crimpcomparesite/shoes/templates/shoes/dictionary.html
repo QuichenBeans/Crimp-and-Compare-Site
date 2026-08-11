@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>{% block title %}Guides{% endblock %}</title>
+
+{% block nav %}
+    {{ block.super }}
+{% endblock %}
+
+{% block header %}
+    <head>
+        <div class="main-title-home">
+            
+        </div>
+    </head>
+{% endblock %}
+
+{% block content %}
+    <main>
+        {% for group in grouped_data %}
+        <section id="{{ group.heading|slugify }}" class="dictionary-section">
+            <h2>{{ group.heading }}</h2>
+            <table class="dictionary-table">
+                <thead>
+                    <tr>
+                        <th>Term</th>
+                        <th>Definition</th>
+                        {% if group.has_example %}  
+                            <th>Example</th>
+                        {% endif %}
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for term in group.terms %}
+                    <tr>
+                        <td><strong>{{ term.term }}</strong></td>
+                        <td>{{ term.description }}</td>
+                        {% if group.has_example %}
+                            <td>{{ term.example|default:"—" }}</td>
+                        {% endif %}
+                        <td>
+                            {% if term.image_url %}
+                                <img src="{{ term.image_url }}" 
+                                    alt="{{ term.term }}" 
+                                    loading="lazy" 
+                                    width="80">
+                            {% else %}
+                                <span class="no-image">—</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        {% empty %}
+            <p class="empty-state">No terms defined yet. Check back soon!</p>
+        {% endfor %}
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+
+{% block script %}
+{% endblock %}

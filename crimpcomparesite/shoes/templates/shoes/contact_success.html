@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+<title>{% block title %}The Crimpy Blog{% endblock %}</title>
+
+{% block nav %}
+    {{ block.super }}
+{% endblock %}
+
+{% block header %}
+    <head>
+        <div class="main-title-guides">
+            <h2>Contact Email Sent Successfully</h2> 
+        </div>
+    </head>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <a href="{% url 'home' %}">Home</a>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+
+{% block script %}
+{% endblock %}
