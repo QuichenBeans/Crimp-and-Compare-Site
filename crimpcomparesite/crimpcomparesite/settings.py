@@ -27,12 +27,18 @@ environ.Env.read_env(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ymv-+8xby4*&or1=9r00zw$o&n56@rck=)1ddgxrcx)n!rl6!='
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '165.232.97.22',
+    'localhost',
+    '127.0.0.1',
+    'crimpandcompare.com',
+    'www.crimpandcompare.com',
+]
 
 # API Key
 
@@ -93,11 +99,11 @@ WSGI_APPLICATION = 'crimpcomparesite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crimpcomparesite',
-        'USER': 'alexhirst1',           
-        'PASSWORD': 'your_password',    
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': env('DB_NAME', default='crimpcomparesite'),
+        'USER': env('DB_USER', default='alexhirst1'),
+        'PASSWORD': env('DB_PASSWORD', default=''),
+        'HOST': env('DB_HOST', default='localhost'),
+        'PORT': env('DB_PORT', default='5432'),
     }
 }
 
