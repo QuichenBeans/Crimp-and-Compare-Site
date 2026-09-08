@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100) # Type of shoe, aggressive, begginer etc
+    name = models.CharField(max_length=100)
     image = models.CharField(max_length=200, default='shoes/default.jpg')
     slug = models.SlugField(unique=True)     
     description = models.TextField(blank=True)

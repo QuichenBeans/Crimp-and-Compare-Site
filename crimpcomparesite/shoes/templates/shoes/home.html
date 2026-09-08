@@ -43,7 +43,11 @@
                     <a href="{% url 'shoe_detail' shoe.slug %}">
                         <img src="{% static shoe.image_url %}" alt="{{ shoe.name }}" style="width:300px; height:300px; object-fit:cover;">
                         <h3>{{ shoe.brand }} - {{ shoe.name }}</h3>
-                        <p>Prices starting at: £{{ shoe.min_price }}</p>
+                        {% if shoe.min_price %}
+                            <p>Prices starting at: £{{ shoe.min_price }}</p>
+                        {% else %}
+                            <p>No prices yet</p>
+                        {% endif %}
                     </a>
                 </div>
             {% endfor %}

@@ -21,10 +21,14 @@
             <div class="shoe-image">
                 <img src="{% static shoe_detail.image_url %}" alt="{{ shoe.name }}" style="width:300px; height:300px; object-fit:cover;">
             </div>
-            
             <div class="shoe-info" style="flex: 1; min-width: 200px;">
                 <h3>{{ shoe_detail.brand }} - {{ shoe_detail.name }}</h3>
-                <p>{{ shoe_detail.category.all|join:", " }}</p>
+                <p>
+                    {% for category in shoe_detail.category.all %}
+                        <a href="{% url 'category_detail' category.slug %}">{{ category.name|cut:" " }}</a>
+                        {% if not forloop.last %}- {% endif %}
+                    {% endfor %}
+                </p>
                 <div class="shoe-offers" style="width: 100%;">
                     {% for offer in shoe_detail.offers.all %}
                         <a href="{{ offer.affiliate_url }}" target="_blank">
@@ -49,7 +53,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div>
+            <div class="shoe-detail-fit-note">
                 <p>{{ shoe_detail.fit_notes }}</p>
             </div>
             
