@@ -40,12 +40,41 @@ ALLOWED_HOSTS = [
     'www.crimpandcompare.com',
 ]
 
+# ============================================
+# PRODUCTION SECURITY SETTINGS
+# ============================================
+
+# HTTPS enforcement
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# HSTS — start low, increase gradually
+SECURE_HSTS_SECONDS = 3600          # Bump to 86400 → 604800 → 31536000 over weeks
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False  # Enable only once ALL subdomains are HTTPS
+SECURE_HSTS_PRELOAD = False         # Leave off until final stage
+
+# Cookies
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+
+# Response headers
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://crimpandcompare.com',
+    'https://www.crimpandcompare.com',
+]
+
 # API Key
 
-client = OpenAI(
-    api_key = env('DS_API_KEY'),
-    base_url="https://api.deepseek.com"
-)
+# client = OpenAI(
+#     api_key = env('DS_API_KEY'),
+#     base_url="https://api.deepseek.com"
+# )
 
 
 # Application definition

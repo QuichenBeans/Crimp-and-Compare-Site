@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<title>{% block title %}{% endblock %}</title>
+
+{% block header %}
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-6DLG8LYRJ7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-6DLG8LYRJ7');
+        </script>
+    </head>
+{% endblock %}
+
 {% block content %}
     <div class="category-detail-container">
         <h1>{{ category.name }}</h1>

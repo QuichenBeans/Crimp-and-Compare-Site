@@ -3,24 +3,34 @@
 
 <title>{% block title %}Crimp & Compare{% endblock %}</title>
 
-{% block nav %}
-<nav>
-    <div class="nav-bar-container">
-        <div class="main-title-home">
-            <a href="{% url 'home' %}"><h1>Crimp & Compare</h1></a>
-        </div>
-        <div class="navigation-options">
-            <a href="{% url 'deals' %}">Deals</a>
-            <a href="{% url 'quiz' %}">Quiz</a>
-            <a href="{% url 'categories' %}">Categories</a>
-            <a href="{% url 'blog' %}">Blog</a>
-        </div>
-    </div>
-</nav>
+{% block header %}
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-6DLG8LYRJ7"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-6DLG8LYRJ7');
+        </script>
+    </head>
 {% endblock %}
 
-{% block header %}
-
+{% block nav %}
+    <nav>
+        <div class="nav-bar-container">
+            <div class="main-title-home">
+                <a href="{% url 'home' %}"><h1>Crimp & Compare</h1></a>
+            </div>
+            <div class="navigation-options">
+                <a href="{% url 'deals' %}">Deals</a>
+                <a href="{% url 'quiz' %}">Quiz</a>
+                <a href="{% url 'categories' %}">Categories</a>
+                <a href="{% url 'blog' %}">Blog</a>
+            </div>
+        </div>
+    </nav>
 {% endblock %}
 
 {% block content %}
