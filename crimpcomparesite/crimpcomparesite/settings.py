@@ -90,7 +90,10 @@ INSTALLED_APPS = [
     'import_export',
     'django_filters',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
