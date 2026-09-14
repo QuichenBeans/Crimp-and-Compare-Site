@@ -24,7 +24,7 @@ from shoes.sitemap import (
     ShoeSitemap, GuideSitemap, CategorySitemap, StaticViewSitemap
 )
 
-app_name = 'shoes'
+# app_name = 'shoes'
 
 sitemaps = {
     'shoes': ShoeSitemap,

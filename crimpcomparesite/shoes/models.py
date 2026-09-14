@@ -16,7 +16,7 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = self.slugify(self.name)
+            self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -36,7 +36,7 @@ class Shoe(models.Model):
     
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = self.slugify(self.name, self.brand)
+            self.slug = slugify(self.name, self.brand)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -80,7 +80,7 @@ class Guide(models.Model):
     date = models.DateField(auto_now_add=True, null=True)
     updated_date = models.DateField(auto_now=True, null=True)
     description = models.TextField(blank=True)
-    short_description = models.CharField(blank=True) # short description for a few lines in guide preview
+    short_description = models.CharField(max_length=400, blank=True) # short description for a few lines in guide preview
     shoe = models.ManyToManyField(Shoe, blank=True)
     slug = models.SlugField(unique=True, blank=True)
 
@@ -89,7 +89,7 @@ class Guide(models.Model):
     
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = self.slugify(self.title)
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
