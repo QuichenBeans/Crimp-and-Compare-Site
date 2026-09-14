@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 # Create your models here.
 
@@ -18,6 +19,9 @@ class Category(models.Model):
             self.slug = self.slugify(self.name)
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
+
 
 class Shoe(models.Model):
     name = models.CharField(max_length=200)
@@ -34,6 +38,9 @@ class Shoe(models.Model):
         if not self.slug:
             self.slug = self.slugify(self.name, self.brand)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('shoe_detail', kwargs={'slug': self.slug})
 
 
 class RetailerOffer(models.Model):
@@ -67,6 +74,7 @@ class AwinProduct(models.Model):
     def __str__(self):
         return self.product_name + ' - ' + self.merchant_name
 
+
 class Guide(models.Model):
     title = models.CharField(max_length=300)
     date = models.DateField(auto_now_add=True, null=True)
@@ -83,6 +91,10 @@ class Guide(models.Model):
         if not self.slug:
             self.slug = self.slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('guides_detail', kwargs={'slug': self.slug})
+    
 
 class Dictionary(models.Model):
     dictionary_heading_choices = [

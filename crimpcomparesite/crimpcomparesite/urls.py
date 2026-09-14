@@ -18,11 +18,26 @@ from django.contrib import admin
 from django.urls import path
 from shoes import views
 from django.views.generic import TemplateView
+from .api import api
+from django.contrib.sitemaps.views import sitemap
+from shoes.sitemap import (
+    ShoeSitemap, GuideSitemap, CategorySitemap, StaticViewSitemap
+)
 
 app_name = 'shoes'
 
+sitemaps = {
+    'shoes': ShoeSitemap,
+    'guides': GuideSitemap,
+    'categories': CategorySitemap,
+    'static': StaticViewSitemap,
+}
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/", api.urls),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
 
     # Home
     path('', views.ShoeListView.as_view(), name='home'),
@@ -38,26 +53,26 @@ urlpatterns = [
 
     # Contact
     path('contact/', views.ContactView.as_view(), name='contact'),
-    path('contact_success', TemplateView.as_view(template_name='shoes/contact_success.html'), name='contact_success'),
+    path('contact_success/', TemplateView.as_view(template_name='shoes/contact_success.html'), name='contact_success'),
 
     # Disclaimer
-    path('disclaimer', views.DisclaimerView.as_view(), name='disclaimer'),
+    path('disclaimer/', views.DisclaimerView.as_view(), name='disclaimer'),
 
     # Blog
     path('blog/', views.ShoeBlogView.as_view(), name='blog'),
 
     # Guides
     path('guides/', views.ShoeGuidesView.as_view(), name='guides'),
-    path('guides/<slug:slug>', views.ShoeGuideDetailView.as_view(), name='guides_detail'),
+    path('guides/<slug:slug>/', views.ShoeGuideDetailView.as_view(), name='guides_detail'),
 
     # Dictionary
     path('dictionary/', views.ShoeDictionaryView.as_view(), name='dictionary'),
 
     # Categories
     path('categories/', views.ShoeCategoriesView.as_view(), name='categories'),
-    path('category/<slug:slug>', views.ShoeCategoryDetailView.as_view(), name='category_detail'),
+    path('category/<slug:slug>/', views.ShoeCategoryDetailView.as_view(), name='category_detail'),
 
     # Quiz
     path('quiz/', views.AIQuizView.as_view(), name='quiz'),
-    path('quiz/quiz_results', views.AIQuizResultsView.as_view(), name='quiz_results'),
+    path('quiz/quiz_results/', views.AIQuizResultsView.as_view(), name='quiz_results'),
 ]

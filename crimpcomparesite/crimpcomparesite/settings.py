@@ -89,6 +89,7 @@ INSTALLED_APPS = [
     'shoes',
     'import_export',
     'django_filters',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
