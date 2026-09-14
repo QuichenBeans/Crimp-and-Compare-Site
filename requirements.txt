@@ -6,3 +6,4 @@ psycopg2-binary==2.9.12
 Pillow==11.3.0
 openai==2.38.0
 gunicorn
+django-ninja
