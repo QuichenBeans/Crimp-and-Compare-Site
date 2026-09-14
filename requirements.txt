@@ -1,0 +1,8 @@
+Django==4.2.30
+django-environ==0.14.0
+django-filter==25.1
+django-import-export==4.4.1
+psycopg2-binary==2.9.12
+Pillow==11.3.0
+openai==2.38.0
+gunicorn
