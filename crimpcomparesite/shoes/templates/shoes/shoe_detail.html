@@ -23,46 +23,42 @@
 
 {% block content %}
     <main>
-        <div class="shoe-detail-container" style="display: flex; flex-wrap: wrap; gap: 20px; padding: 0 2rem;">
-            <div class="shoe-image">
-                <img src="{% static shoe_detail.image_url %}" alt="{{ shoe.name }}" style="width:300px; height:300px; object-fit:cover;">
-            </div>
-            <div class="shoe-info" style="flex: 1; min-width: 200px;">
-                <h3>{{ shoe_detail.brand }} - {{ shoe_detail.name }}</h3>
-                <p>
-                    {% for category in shoe_detail.category.all %}
-                        <a href="{% url 'category_detail' category.slug %}">{{ category.name|cut:" " }}</a>
-                        {% if not forloop.last %}- {% endif %}
-                    {% endfor %}
-                </p>
-                <div class="shoe-offers" style="width: 100%;">
-                    {% for offer in shoe_detail.offers.all %}
-                        <a href="{{ offer.affiliate_url }}" target="_blank">
-                            <p class="price-info">
-                                <span class="">
-                                    {{ offer.retailer }} - 
-                                </span>
-                                {% if offer.discounted_price %}
-                                    <span class="sale-price" style="text-decoration: line-through;">
-                                        Was £{{ offer.price }}
-                                    </span>
-                                    <span class="savings" style="color: red; font-weight: bold;">
-                                        Now £{{ offer.discounted_price }}
-                                    </span>
-                                {% else %}
-                                    <span class="regular-price">
-                                        £{{ offer.price }}
-                                    </span>
-                                {% endif %}
-                            </p>
-                        </a>
-                    {% endfor %}
+        <div class="shoe-detail-box">
+            <div class="shoe-detail-container">
+                <div class="shoe-image">
+                    <img src="{% static shoe_detail.image_url %}" alt="{{ shoe.name }}">
+                </div>
+                <div class="shoe-info">
+                    <h3>{{ shoe_detail.brand }} - {{ shoe_detail.name }}</h3>
+                    <p>
+                        {% for category in shoe_detail.category.all %}
+                            <a href="{% url 'category_detail' category.slug %}">{{ category.name|cut:" " }}</a>
+                            {% if not forloop.last %}- {% endif %}
+                        {% endfor %}
+                    </p>
+                    <div class="shoe-offers">
+                        {% for offer in shoe_detail.offers.all %}
+                            <a href="{{ offer.affiliate_url }}" target="_blank">
+                                <p class="price-info">
+                                    <span>{{ offer.retailer }} - </span>
+                                    {% if offer.discounted_price %}
+                                        <span class="sale-price">Was £{{ offer.price }}</span>
+                                        <span class="savings">Now £{{ offer.discounted_price }}</span>
+                                    {% else %}
+                                        <span class="regular-price">£{{ offer.price }}</span>
+                                    {% endif %}
+                                </p>
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <div class="shoe-detail-disclaimer">
+                        <p>This site contains affiliate links. If you make a purchase through these links, I may earn a commission.</p>
+                    </div>
+                </div>
+                <div class="shoe-detail-fit-note">
+                    <p>{{ shoe_detail.fit_notes }}</p>
                 </div>
             </div>
-            <div class="shoe-detail-fit-note">
-                <p>{{ shoe_detail.fit_notes }}</p>
-            </div>
-            
         </div>
     </main>
 {% endblock %}

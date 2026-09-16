@@ -30,7 +30,7 @@ environ.Env.read_env(BASE_DIR / '.env')
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '165.232.97.22',
@@ -44,14 +44,14 @@ ALLOWED_HOSTS = [
 # PRODUCTION SECURITY SETTINGS
 # ============================================
 
-# HTTPS enforcement
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# # HTTPS enforcement
+# SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# HSTS — start low, increase gradually
-SECURE_HSTS_SECONDS = 3600          # Bump to 86400 → 604800 → 31536000 over weeks
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False  # Enable only once ALL subdomains are HTTPS
-SECURE_HSTS_PRELOAD = False         # Leave off until final stage
+# # HSTS — start low, increase gradually
+# SECURE_HSTS_SECONDS = 3600          # Bump to 86400 → 604800 → 31536000 over weeks
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = False  # Enable only once ALL subdomains are HTTPS
+# SECURE_HSTS_PRELOAD = False         # Leave off until final stage
 
 # Cookies
 SESSION_COOKIE_SECURE = True
