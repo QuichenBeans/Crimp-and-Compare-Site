@@ -27,12 +27,12 @@
         {% endif %}
     </div>
 
-    <div class="shoe-thumbnail-container">
+    <div class="shoe-thumbnail-container-categories">
         {% for category in category_detail %}
-        <div class="shoe-thumbnail">
+        <div class="shoe-thumbnail-categories">
             <a href="{% url 'shoe_detail' category.slug %}">
             {% if category.image_url %}
-                <img src="{% static category.image_url %}" alt="{{ category.name }}" style="width:300px; height:300px; object-fit:cover;">
+                <img src="{% static category.image_url %}" alt="{{ category.name }}" class="shoe-thumbnail-img">
             {% endif %}
             <h3>{{ category.brand }} - {{ category.name }}</h3>
             </a>
